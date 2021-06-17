@@ -39,13 +39,12 @@ def confirm_details():
 root = Tk()
 root.title("Lotto Numbers")
 root.geometry('400x400')
-root.config(bg="red")
-canvas = Canvas(root, width=300,height=300)
+root.config(bg="royalblue")
+canvas = Canvas(root, width=500, height=400)
 canvas.place(x=10, y=200)
 img = PhotoImage(file="imgbin-lotto-generator-lottery-649-euromillions-game-android-jATjNBwSg7ACmj8c7p2wvAHpJ.png")
-img = img.subsample(5)
-canvas.create_image(15, 15, anchor=NW, image=img)
-
+img = img.subsample(2)
+canvas.create_image(0, 0, anchor=NW, image=img)
 
 username = Label(root, text="Please enter name")
 username.place(x=10, y=50)
