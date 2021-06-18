@@ -4,14 +4,14 @@ from tkinter import messagebox
 
 root = Tk()
 root.geometry("500x400")
-root.config(bg="black")
+root.config(bg="gold")
 list1 = []
 list2 = []
 list3 = []
 
-canvas = Canvas(root, width=500, height=400)
-canvas.place(x=0, y=0)
-img = PhotoImage(file="imgbin-lotto-generator-lottery-649-euromillions-game-android-jATjNBwSg7ACmj8c7p2wvAHpJ.png")
+canvas = Canvas(root, width=500, height=400, bg="gold", highlightthickness=0)
+canvas.place(x=0, y=100)
+img = PhotoImage(file="lotto-G.png")
 canvas.create_image(0, 0, anchor=NW, image=img)
 
 label_fr1 = LabelFrame(root, text="Entry Numbers", bg="royalblue", pady=10)
@@ -20,13 +20,13 @@ label_fr1.pack(fill="both")
 
 def funcname(num):
     if len(list1) < 6 and num not in list1:
-        list1.append(num)
+        list1.append(int(num))
         user_entries1.config(text=list1)
     elif len(list1) == 6 and len(list2) < 6 and num not in list2:
-        list2.append(num)
+        list2.append(int(num))
         user_entries2.config(text=list2)
     elif len(list2) == 6 and len(list1) == 6 and len(list3) < 6 and num not in list3:
-        list3.append(num)
+        list3.append(int(num))
         user_entries3.config(text=list3)
     if len(list3) == 6:
         numbtn1.config(state=DISABLED)
@@ -78,6 +78,7 @@ def funcname(num):
         numbtn47.config(state=DISABLED)
         numbtn48.config(state=DISABLED)
         numbtn49.config(state=DISABLED)
+
 
 # buttons
 numbtn1 = Button(root, text=1, command=lambda: funcname(1))
@@ -197,8 +198,8 @@ def random_list():
     label_show.configure(text=random_list)
 
     counter = 0
-    for numbers in user_entries1:
-        if numbers in random_list:
+    for index in range(0, 6):
+        if user_entries1[index] == random_list[index]:
             counter += 1
         if counter <= 1:
             messagebox.showinfo("Unlucky")
@@ -224,8 +225,8 @@ def random_list():
             messagebox.showinfo("You won R10,000 000.00")
             break
 
-    for numbers in user_entries2:
-        if numbers in random_list:
+    for numbers in range(0, 6):
+        if user_entries2[numbers] in random_list[numbers]:
             counter += 1
         if counter <= 1:
             messagebox.showinfo("Unlucky")
@@ -251,8 +252,8 @@ def random_list():
             messagebox.showinfo("You won R10,000 000.00")
             break
 
-    for numbers in user_entries3:
-        if numbers in random_list:
+    for numbers in range(0, 6):
+        if user_entries3[numbers] in random_list[numbers]:
             counter += 1
         if counter <= 1:
             messagebox.showinfo("Unlucky")
@@ -279,7 +280,7 @@ def random_list():
             break
 
 
-click_btn = Button(root, text="press", command=random_list)
+click_btn = Button(root, text="Play", command=random_list)
 click_btn.place(x=300, y=220)
 
 click_btn.configure(command=random_list)
@@ -292,7 +293,7 @@ def retry():
     user_entries1.config(text='')
     user_entries2.config(text='')
     user_entries3.config(text='')
-    funcname.config(state=NORMAL)
+    click_btn.config(state=NORMAL)
     numbtn1.config(state=NORMAL)
     numbtn2.config(state=NORMAL)
     numbtn3.config(state=NORMAL)
@@ -343,11 +344,12 @@ def retry():
     numbtn48.config(state=NORMAL)
     numbtn49.config(state=NORMAL)
 
-label_num = Label(root, text="Lotto Numbers!")
-label_num.place(x=10, y=85)
 
-label_show=Label(root)
-label_show.place(x=130, y=85)
+label_num = Label(root, text="Lotto Numbers!")
+label_num.place(x=200, y=300)
+
+label_show = Label(root)
+label_show.place(x=320, y=300)
 
 
 root.mainloop()

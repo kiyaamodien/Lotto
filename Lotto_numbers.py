@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 import datetime
-from PIL import Image
 import re
 
 regex = '[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
@@ -22,6 +21,9 @@ def confirm_details():
         for x in range(int(id_number.get())):
             res = int(id_number.get()[0:2]) - int(age.strftime("%y"))
             if res >= 18:
+                gamelog = open("Winnings.txt", "+w")
+                gamelog.write("name: " + username.get() + "\nEmail: " + email.get() + "\nID number: " + id_number.get() + "\naddress:" + address.get())
+                gamelog.close()
                 messagebox.showinfo("Status", "You qualify to play")
                 root.destroy()
                 import lotto
@@ -38,12 +40,12 @@ def confirm_details():
 
 root = Tk()
 root.title("Lotto Numbers")
-root.geometry('400x400')
+root.geometry('400x300')
 root.config(bg="royalblue")
-canvas = Canvas(root, width=500, height=400)
-canvas.place(x=10, y=200)
-img = PhotoImage(file="imgbin-lotto-generator-lottery-649-euromillions-game-android-jATjNBwSg7ACmj8c7p2wvAHpJ.png")
-img = img.subsample(2)
+canvas = Canvas(root, width=500, height=400, bg="gold", highlightthickness=0)
+canvas.place(x=0, y=0)
+img = PhotoImage(file="lotto-G.png")
+img = img.subsample(1)
 canvas.create_image(0, 0, anchor=NW, image=img)
 
 username = Label(root, text="Please enter name")
@@ -65,6 +67,9 @@ email = Label(root, text="Please enter email")
 email.place(x=10, y=140)
 email = Entry(bg="white")
 email.place(x=180, y=140)
+
+label_register = Label(root, text="Register now", font="arial 20 bold")
+label_register.place(x=100, y=12)
 
 b1 = Button(root, text="Enter", command=confirm_details)
 b1.place(x=50, y=180)
