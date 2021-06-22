@@ -71,8 +71,8 @@ def funcname(num):
         numbtn40.config(state=DISABLED)
         numbtn41.config(state=DISABLED)
         numbtn42.config(state=DISABLED)
-        numbtn44.config(state=DISABLED)
         numbtn43.config(state=DISABLED)
+        numbtn44.config(state=DISABLED)
         numbtn45.config(state=DISABLED)
         numbtn46.config(state=DISABLED)
         numbtn47.config(state=DISABLED)
@@ -171,16 +171,14 @@ numbtn44 = Button(root, text=44, command=lambda: funcname(44))
 numbtn44.place(x=310, y=180)
 numbtn45 = Button(root, text=45, command=lambda: funcname(45))
 numbtn45.place(x=350, y=180)
-numbtn46 = Button(root, text=45, command=lambda: funcname(46))
-numbtn46.place(x=30, y=220)
 numbtn46 = Button(root, text=46, command=lambda: funcname(47))
-numbtn46.place(x=70, y=220)
+numbtn46.place(x=30, y=220)
 numbtn47 = Button(root, text=47, command=lambda: funcname(48))
-numbtn47.place(x=110, y=220)
+numbtn47.place(x=70, y=220)
 numbtn48 = Button(root, text=48, command=lambda: funcname(48))
-numbtn48.place(x=150, y=220)
+numbtn48.place(x=110, y=220)
 numbtn49 = Button(root, text=49, command=lambda: funcname(49))
-numbtn49.place(x=200, y=220)
+numbtn49.place(x=150, y=220)
 total = Label(root, text="")
 total.place(x=20, y=540)
 
@@ -191,109 +189,13 @@ user_entries2.place(x=0, y=310)
 user_entries3 = Label(root, text='', bg='yellow', width=15, justify='center')
 user_entries3.place(x=0, y=360)
 
-
-def random_list():
-    random_list = sample(range(1, 49), 6)
-    random_list.sort()
-    label_show.configure(text=random_list)
-
-    counter = 0
-    for index in range(0, 6):
-        if user_entries1[index] == random_list[index]:
-            counter += 1
-        if counter <= 1:
-            messagebox.showinfo("Unlucky")
-            break
-
-        elif counter == 2:
-            messagebox.showinfo("You won R20")
-            break
-
-        elif counter == 3:
-            messagebox.showinfo("You won R100")
-            break
-
-        elif counter == 4:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 5:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 6:
-            messagebox.showinfo("You won R10,000 000.00")
-            break
-
-    for numbers in range(0, 6):
-        if user_entries2[numbers] in random_list[numbers]:
-            counter += 1
-        if counter <= 1:
-            messagebox.showinfo("Unlucky")
-            break
-
-        elif counter == 2:
-            messagebox.showinfo("You won R20")
-            break
-
-        elif counter == 3:
-            messagebox.showinfo("You won R100")
-            break
-
-        elif counter == 4:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 5:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 6:
-            messagebox.showinfo("You won R10,000 000.00")
-            break
-
-    for numbers in range(0, 6):
-        if user_entries3[numbers] in random_list[numbers]:
-            counter += 1
-        if counter <= 1:
-            messagebox.showinfo("Unlucky")
-            break
-
-        elif counter == 2:
-            messagebox.showinfo("You won R20")
-            break
-
-        elif counter == 3:
-            messagebox.showinfo("You won R100")
-            break
-
-        elif counter == 4:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 5:
-            messagebox.showinfo("You won R2,384.00")
-            break
-
-        elif counter == 6:
-            messagebox.showinfo("You won R10,000 000.00")
-            break
-
-
-click_btn = Button(root, text="Play", command=random_list)
-click_btn.place(x=300, y=220)
-
-click_btn.configure(command=random_list)
-
-
-def retry():
+def reset_list():
     list1.clear()
     list2.clear()
     list3.clear()
     user_entries1.config(text='')
     user_entries2.config(text='')
     user_entries3.config(text='')
-    click_btn.config(state=NORMAL)
     numbtn1.config(state=NORMAL)
     numbtn2.config(state=NORMAL)
     numbtn3.config(state=NORMAL)
@@ -343,6 +245,104 @@ def retry():
     numbtn47.config(state=NORMAL)
     numbtn48.config(state=NORMAL)
     numbtn49.config(state=NORMAL)
+
+
+def random_list():
+    random_list = sample(range(1, 49), 6)
+    random_list.sort()
+    label_show.configure(text=random_list)
+
+    counter = 0
+    for x in range(0, 6):
+        # import pdb;pdb.set_trace()
+        if list1[x] == random_list[x]:
+            counter = counter + 1
+        if counter <= 1:
+            messagebox.showinfo("Unlucky")
+            break
+
+        elif counter == 2:
+            messagebox.showinfo("You won R20")
+            break
+
+        elif counter == 3:
+            messagebox.showinfo("You won R100")
+            break
+
+        elif counter == 4:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 5:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 6:
+            messagebox.showinfo("You won R10,000 000.00")
+            break
+
+    for numbers in range(0, 6):
+        if list2[numbers] == random_list[numbers]:
+            counter += 1
+        if counter <= 1:
+            messagebox.showinfo("Unlucky")
+            break
+
+        elif counter == 2:
+            messagebox.showinfo("You won R20")
+            break
+
+        elif counter == 3:
+            messagebox.showinfo("You won R100")
+            break
+
+        elif counter == 4:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 5:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 6:
+            messagebox.showinfo("You won R10,000 000.00")
+            break
+
+    for numbers in range(0, 6):
+        if list3[numbers] == random_list[numbers]:
+            counter += 1
+        if counter <= 1:
+            messagebox.showinfo("Unlucky")
+            break
+
+        elif counter == 2:
+            messagebox.showinfo("You won R20")
+            break
+
+        elif counter == 3:
+            messagebox.showinfo("You won R100")
+            break
+
+        elif counter == 4:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 5:
+            messagebox.showinfo("You won R2,384.00")
+            break
+
+        elif counter == 6:
+            messagebox.showinfo("You won R10,000 000.00")
+            break
+
+
+click_btn = Button(root, text="Play", command=random_list)
+click_btn.place(x=300, y=220)
+
+click_btn.configure(command=random_list)
+
+pa_btn = Button(root, text="Play again", command=reset_list)
+pa_btn.place(x=300, y=250)
 
 
 label_num = Label(root, text="Lotto Numbers!")

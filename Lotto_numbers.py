@@ -8,31 +8,34 @@ regex = '[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
 def confirm_details():
     age = datetime.datetime.today()
+    mailval = ''
     try:
         for i in range(len(email.get())):
             if re.search(regex, email.get()):
                 messagebox.showinfo("Status", "Valid Email")
+                mailval = 'valid'
                 break
 
             else:
                 messagebox.showerror("Error", "Invalid Email")
+                mailval = ''
                 break
 
-        for x in range(int(id_number.get())):
-            res = int(id_number.get()[0:2]) - int(age.strftime("%y"))
-            if res >= 18:
-                gamelog = open("Winnings.txt", "+w")
-                gamelog.write("name: " + username.get() + "\nEmail: " + email.get() + "\nID number: " + id_number.get() + "\naddress:" + address.get())
-                gamelog.close()
-                messagebox.showinfo("Status", "You qualify to play")
-                root.destroy()
-                import lotto
-            elif len(id_number.get()) != 13:
-                messagebox.showerror("Error", "Not valid ID number")
-                break
-            else:
-                messagebox.showerror("Error", "You are too young")
-                break
+        if 00 <= int(id_number.get()[0:2]) < 21:
+            res = int(age.strftime("%y")) - int(id_number.get()[0:2])
+        else:
+            res = (2000 + int(age.strftime("%y"))) - (1900 + int(id_number.get()[0:2]))
+        if res >= 18 and mailval == 'valid':
+            gamelog = open("Winnings.txt", "+w")
+            gamelog.write("name: " + username.get() + "\nEmail: " + email.get() + "\nID number: " + id_number.get() + "\naddress:" + address.get())
+            gamelog.close()
+            messagebox.showinfo("Status", "You qualify to play")
+            root.destroy()
+            import lotto
+        elif len(id_number.get()) != 13:
+            messagebox.showerror("Error", "Not valid ID number")
+        elif res < 18:
+            messagebox.showerror("Error", "You are too young")
     except ValueError:
         if id_number.get() != int:
             messagebox.showerror("Error", "the ID number must be an integer")
